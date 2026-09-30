@@ -1,0 +1,28 @@
+{
+  "name": "controle-gastos-mes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+ "scripts": {
+ "test": "vitest run --passWithNoTests",
+  "dev": "tsx src/index.ts"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsabelyVictoriadaSilva/controle-gastos-mes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IsabelyVictoriadaSilva/controle-gastos-mes/issues"
+  },
+  "homepage": "https://github.com/IsabelyVictoriadaSilva/controle-gastos-mes#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}
