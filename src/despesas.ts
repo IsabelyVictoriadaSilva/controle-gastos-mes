@@ -31,5 +31,5 @@ export function despesasDaCategoria(
     despesas: Despesa[],
     categoria: string
 ): Despesa[] {
-    throw new Error("não implementado");
-}
+   return despesas.filter((despesa) => despesa.categoria === categoria);
+}   

@@ -118,6 +118,7 @@ describe("removerDespesa", () => {
 // começo do teste da função despesasDaCategoria
 // 2 testes
 
+
 describe("despesasDaCategoria", () => {
 
     it("deve retornar somente as despesas da categoria informada", () => {
