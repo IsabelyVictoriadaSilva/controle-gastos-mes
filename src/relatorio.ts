@@ -1,3 +1,4 @@
+import type { Despesa } from "./tipos.js";
 export function descricaoCategoria(
     categoria: string
 ): string {
@@ -18,4 +19,9 @@ export function descricaoCategoria(
         default:
             return categoria;
     }
+}
+export function matrizCategoriaMes(
+    despesas: Despesa[]
+): number[][] {
+    throw new Error("não implementado");
 }
