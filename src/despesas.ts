@@ -32,4 +32,11 @@ export function despesasDaCategoria(
     categoria: string
 ): Despesa[] {
    return despesas.filter((despesa) => despesa.categoria === categoria);
+  // Filtra as despesas pela categoria informada e retorna um novo array com as despesas encontradas.
 }   
+
+export function totalGasto(
+    despesas: Despesa[]
+): number {
+    throw new Error("não implementado");
+}

@@ -3,7 +3,8 @@ import { describe, it, expect } from "vitest";
 import {
     adicionarDespesa,
     removerDespesa,
-    despesasDaCategoria
+    despesasDaCategoria,
+    totalGasto
 } from "./despesas.js";
 
 
@@ -165,6 +166,43 @@ describe("despesasDaCategoria", () => {
         const resultado = despesasDaCategoria(despesas, "lazer");
 
         expect(resultado).toEqual([]);
+    });
+
+});
+
+// começo do teste da função totalGasto
+// 2 testes
+describe("totalGasto", () => {
+
+    it("deve retornar a soma dos valores das despesas", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            },
+            {
+                id: 2,
+                descricao: "Cinema",
+                valor: 30,
+                categoria: "lazer",
+                mes: 2
+            }
+        ];
+
+        const resultado = totalGasto(despesas);
+
+        expect(resultado).toBe(55);
+    });
+
+    it("deve retornar zero quando a lista estiver vazia", () => {
+        const despesas: Despesa[] = [];
+
+        const resultado = totalGasto(despesas);
+
+        expect(resultado).toBe(0);
     });
 
 });
