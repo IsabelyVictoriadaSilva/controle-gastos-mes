@@ -4,7 +4,8 @@ import {
     adicionarDespesa,
     removerDespesa,
     despesasDaCategoria,
-    totalGasto
+    totalGasto,
+    maiorDespesa
 } from "./despesas.js";
 
 
@@ -203,6 +204,51 @@ describe("totalGasto", () => {
         const resultado = totalGasto(despesas);
 
         expect(resultado).toBe(0);
+    });
+
+});
+
+// começo do teste da função maiorDespesa
+// 2 testes
+
+describe("maiorDespesa", () => {
+
+    it("deve retornar a despesa de maior valor", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            },
+            {
+                id: 2,
+                descricao: "Cinema",
+                valor: 30,
+                categoria: "lazer",
+                mes: 2
+            },
+            {
+                id: 3,
+                descricao: "Mercado",
+                valor: 80,
+                categoria: "alimentacao",
+                mes: 2
+            }
+        ];
+
+        const resultado = maiorDespesa(despesas);
+
+        expect(resultado).toEqual(despesas[2]);
+    });
+
+    it("deve retornar undefined quando a lista estiver vazia", () => {
+        const despesas: Despesa[] = [];
+
+        const resultado = maiorDespesa(despesas);
+
+        expect(resultado).toBeUndefined();
     });
 
 });

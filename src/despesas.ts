@@ -41,3 +41,9 @@ export function totalGasto(
    return despesas.reduce((total, despesa) => total + despesa.valor, 0);
    // Soma o valor de todas as despesas, começando a soma em zero.
 }
+
+export function maiorDespesa(
+    despesas: Despesa[]
+): Despesa | undefined {
+    throw new Error("não implementado");
+}
