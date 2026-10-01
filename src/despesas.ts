@@ -38,5 +38,6 @@ export function despesasDaCategoria(
 export function totalGasto(
     despesas: Despesa[]
 ): number {
-    throw new Error("não implementado");
+   return despesas.reduce((total, despesa) => total + despesa.valor, 0);
+   // Soma o valor de todas as despesas, começando a soma em zero.
 }
