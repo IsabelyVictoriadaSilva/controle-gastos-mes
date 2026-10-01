@@ -1,5 +1,21 @@
 export function descricaoCategoria(
     categoria: string
 ): string {
-    throw new Error("não implementado");
+    // Verifica a categoria e retorna seu nome de exibição.
+    switch (categoria) {
+        case "alimentacao":
+            return "Alimentação";
+
+        case "transporte":
+            return "Transporte";
+
+        case "lazer":
+            return "Lazer";
+
+        case "moradia":
+            return "Moradia";
+
+        default:
+            return categoria;
+    }
 }
