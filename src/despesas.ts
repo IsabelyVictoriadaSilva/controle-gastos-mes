@@ -32,7 +32,7 @@ export function despesasDaCategoria(
     categoria: string
 ): Despesa[] {
    return despesas.filter((despesa) => despesa.categoria === categoria);
-  // Filtra as despesas pela categoria informada e retorna um novo array com as despesas encontradas.
+  // Filtra as despesas pela categoria informada e retorna um novo array com as despesas encontradas
 }   
 
 export function totalGasto(
@@ -43,7 +43,15 @@ export function totalGasto(
 }
 
 export function maiorDespesa(
-    despesas: Despesa[]
+    despesas: Despesa[],
 ): Despesa | undefined {
-    throw new Error("não implementado");
+    // Se a lista estiver vazia, não existe uma maior despesa
+   if (despesas.length === 0) {
+        return undefined;
+    }
+    // Percorre as despesas e retorna aquela que possui o maior valor
+return despesas.reduce((maior, despesa) =>
+    despesa.valor > maior.valor ? despesa : maior
+);
+
 }
