@@ -58,7 +58,7 @@ describe("adicionarDespesa", () => {
             categoria: "transporte",
             mes: 2
         };
-
+// A função cria um novo array para adicionar a despesa, por isso o array original não é alterado.
         adicionarDespesa(despesas, nova);
 
         expect(despesas).toEqual([]);
