@@ -1,4 +1,5 @@
 import type { Despesa } from "./tipos.js";
+import { CATEGORIAS } from "./tipos.js";
 export function descricaoCategoria(
     categoria: string
 ): string {
@@ -23,5 +24,33 @@ export function descricaoCategoria(
 export function matrizCategoriaMes(
     despesas: Despesa[]
 ): number[][] {
-    throw new Error("não implementado");
+    const matriz: number[][] = [];
+
+// Cria uma linha para cada categoria
+for (let i = 0; i < CATEGORIAS.length; i++) {
+    const linha: number[] = [];
+
+    // Cria 12 colunas, uma para cada mês, começando com zero
+    for (let mes = 0; mes < 12; mes++) {
+        linha.push(0);
+    }
+
+    matriz.push(linha);
+}
+
+// Percorre todas as despesas
+for (let i = 0; i < despesas.length; i++) {
+    const despesa = despesas[i];
+
+    // Procura a linha correspondente à categoria da despesa
+    for (let categoria = 0; categoria < CATEGORIAS.length; categoria++) {
+        if (despesa.categoria === CATEGORIAS[categoria]) {
+
+            // mes - 1 porque janeiro (mês 1) fica na posição 0
+            matriz[categoria][despesa.mes - 1] += despesa.valor;
+        }
+    }
+}
+
+return matriz;
 }
