@@ -1,10 +1,15 @@
 import type { Despesa } from "./tipos.js";
 import { describe, it, expect } from "vitest";
-import { adicionarDespesa, removerDespesa } from "./despesas.js";
+import {
+    adicionarDespesa,
+    removerDespesa,
+    despesasDaCategoria
+} from "./despesas.js";
 
 
 
 // começo do teste da função adicionarDespesa
+// 3 testes
 
 
 describe("adicionarDespesa", () => {
@@ -60,6 +65,7 @@ describe("adicionarDespesa", () => {
 });
 
 // começo do teste da função removerDespesa
+// 2 testes
 
 describe("removerDespesa", () => {
 
@@ -105,6 +111,59 @@ describe("removerDespesa", () => {
 
         // Mas deve ser um novo array
         expect(resultado).not.toBe(despesas);
+    });
+
+});
+
+// começo do teste da função despesasDaCategoria
+// 2 testes
+
+describe("despesasDaCategoria", () => {
+
+    it("deve retornar somente as despesas da categoria informada", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            },
+            {
+                id: 2,
+                descricao: "Cinema",
+                valor: 30,
+                categoria: "lazer",
+                mes: 2
+            },
+            {
+                id: 3,
+                descricao: "Jantar",
+                valor: 40,
+                categoria: "alimentacao",
+                mes: 2
+            }
+        ];
+
+        const resultado = despesasDaCategoria(despesas, "alimentacao");
+
+        expect(resultado).toEqual([despesas[0], despesas[2]]);
+    });
+
+    it("deve retornar um array vazio quando não houver despesas da categoria", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            }
+        ];
+
+        const resultado = despesasDaCategoria(despesas, "lazer");
+
+        expect(resultado).toEqual([]);
     });
 
 });
