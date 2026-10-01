@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import {
     descricaoCategoria,
-    matrizCategoriaMes
+    matrizCategoriaMes,
+    formatarRelatorio
 } from "./relatorio.js";
 
 describe("descricaoCategoria", () => {
@@ -73,6 +74,53 @@ describe("matrizCategoriaMes", () => {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // lazer
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  // moradia
         ]);
+    });
+
+});
+
+describe("formatarRelatorio", () => {
+
+    it("deve formatar o relatório com as informações das despesas", () => {
+        const despesas = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao" as const,
+                mes: 1
+            },
+            {
+                id: 2,
+                descricao: "Cinema",
+                valor: 30,
+                categoria: "lazer" as const,
+                mes: 2
+            }
+        ];
+
+        const resultado = formatarRelatorio(despesas);
+
+        // Verifica se o relatório possui o título
+        expect(resultado).toContain("RELATÓRIO");
+
+        // Verifica se aparecem as categorias
+        expect(resultado).toContain("Alimentação");
+        expect(resultado).toContain("Lazer");
+
+        // Total geral: 25 + 30 = 55
+        expect(resultado).toContain("55.00");
+
+        // A maior despesa é Cinema, no valor de 30
+        expect(resultado).toContain("Cinema");
+        expect(resultado).toContain("30.00");
+    });
+
+
+    it("deve funcionar quando a lista de despesas estiver vazia", () => {
+        const resultado = formatarRelatorio([]);
+
+        // Sem despesas, o total geral deve ser zero
+        expect(resultado).toContain("0.00");
     });
 
 });
