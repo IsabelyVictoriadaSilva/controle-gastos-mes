@@ -1,12 +1,14 @@
 import type { Despesa } from "./tipos.js";
 import { describe, it, expect } from "vitest";
-import { adicionarDespesa } from "./despesas.js";
+import { adicionarDespesa, removerDespesa } from "./despesas.js";
+
+
+
+// começo do teste da função adicionarDespesa
+
 
 describe("adicionarDespesa", () => {
 
-    //const despesas - cria uma variável chamada despesas
-    //: Despesa[] - diz que ela será uma LISTA de Despesa
-    //= [] - começa essa lista vazia
     it("deve adicionar uma despesa válida", () => {
         const despesas: Despesa[] = [];
 
@@ -19,36 +21,90 @@ describe("adicionarDespesa", () => {
         };
 
         const resultado = adicionarDespesa(despesas, nova);
+
         expect(resultado).toEqual([nova]);
     });
-it("deve lançar erro quando o valor for zero", () => {
-const despesas: Despesa[] = [];
 
-const nova: Despesa = {
-    id: 2,
-    descricao: "Cinema",
-    valor: 0,
-    categoria: "lazer",
-    mes: 2
-};
-expect(() => adicionarDespesa(despesas, nova)).toThrow();
+
+    it("deve lançar erro quando o valor for zero", () => {
+        const despesas: Despesa[] = [];
+
+        const nova: Despesa = {
+            id: 2,
+            descricao: "Cinema",
+            valor: 0,
+            categoria: "lazer",
+            mes: 2
+        };
+
+        expect(() => adicionarDespesa(despesas, nova)).toThrow();
+    });
+
+
+    it("não deve alterar o array original", () => {
+        const despesas: Despesa[] = [];
+
+        const nova: Despesa = {
+            id: 3,
+            descricao: "Ônibus",
+            valor: 10,
+            categoria: "transporte",
+            mes: 2
+        };
+
+        adicionarDespesa(despesas, nova);
+
+        expect(despesas).toEqual([]);
+    });
 
 });
 
-it("não deve alterar o array original", () => {
-    const despesas: Despesa[] = [];
+// começo do teste da função removerDespesa
 
-    const nova: Despesa = {
-        id: 3,
-        descricao: "Ônibus",
-        valor: 10,
-        categoria: "transporte",
-        mes: 2
-    };
+describe("removerDespesa", () => {
 
-    adicionarDespesa(despesas, nova);
+    it("deve remover uma despesa pelo id", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            },
+            {
+                id: 2,
+                descricao: "Cinema",
+                valor: 30,
+                categoria: "lazer",
+                mes: 2
+            }
+        ];
 
-    // A função deve criar um novo array, sem modificar o array recebido
-    expect(despesas).toEqual([]);
-});
+        const resultado = removerDespesa(despesas, 1);
+
+        expect(resultado).toEqual([despesas[1]]);
+    });
+
+
+    it("deve retornar uma cópia quando o id não existir", () => {
+        const despesas: Despesa[] = [
+            {
+                id: 1,
+                descricao: "Almoço",
+                valor: 25,
+                categoria: "alimentacao",
+                mes: 2
+            }
+        ];
+
+        const resultado = removerDespesa(despesas, 99);
+
+        // O conteúdo deve continuar igual
+        expect(resultado).toEqual(despesas);
+
+        // Mas deve ser um novo array
+        expect(resultado).not.toBe(despesas);
+    });
+
 });

@@ -16,3 +16,13 @@ export function adicionarDespesa(
 
     return [...despesas, nova];
 }
+
+export function removerDespesa(
+    despesas: Despesa[],
+    id: number
+): Despesa[] {
+   return despesas.filter((despesa) => despesa.id !== id);
+   // filter percorre a lista de despesas e cria uma nova lista.
+   // despesa.id !== id vai manter todas as despesas que o id seja diferente do id passado como parâmetro 
+   
+}
