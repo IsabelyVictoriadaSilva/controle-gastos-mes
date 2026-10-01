@@ -1,5 +1,6 @@
 import type { Despesa } from "./tipos.js";
 import { CATEGORIAS } from "./tipos.js";
+import { totalGasto, maiorDespesa } from "./despesas.js";
 export function descricaoCategoria(
     categoria: string
 ): string {
@@ -58,5 +59,37 @@ return matriz;
 export function formatarRelatorio(
     despesas: Despesa[]
 ): string {
-    throw new Error("não implementado");
+   let relatorio = "RELATÓRIO DE GASTOS".toUpperCase() + "\n\n";
+
+// Percorre todas as categorias
+for (let i = 0; i < CATEGORIAS.length; i++) {
+    let totalCategoria = 0;
+
+    // Soma as despesas da categoria atual
+    for (let j = 0; j < despesas.length; j++) {
+        if (despesas[j].categoria === CATEGORIAS[i]) {
+            totalCategoria += despesas[j].valor;
+        }
+    }
+
+    // Nome da categoria alinhado e total com duas casas decimais
+    const nome = descricaoCategoria(CATEGORIAS[i]).padEnd(15);
+    relatorio += `${nome} R$ ${totalCategoria.toFixed(2)}\n`;
+}
+
+// Calcula o total de todas as despesas
+const total = totalGasto(despesas);
+
+relatorio += `\nTOTAL GERAL: R$ ${total.toFixed(2)}\n`;
+
+// Procura a maior despesa
+const maior = maiorDespesa(despesas);
+
+if (maior !== undefined) {
+    relatorio += `MAIOR DESPESA: ${maior.descricao} - R$ ${maior.valor.toFixed(2)}`;
+} else {
+    relatorio += "MAIOR DESPESA: nenhuma";
+}
+
+return relatorio;
 }
